@@ -1,0 +1,568 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#23306b">
+<meta name="robots" content="noindex">
+<title>יפן אפריל 2027</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Secular+One&family=Assistant:wght@400;600;700&family=Noto+Sans+JP:wght@500;700&display=swap">
+<style>
+/* Layout: phone-first trip companion. Each day is a JR-style station sign (city big, prev/next stations underneath), bottom tab bar for one-thumb use. */
+:root{
+  --paper:#f4f6f9; --card:#ffffff; --ink:#18213d; --ink-2:#4a5470; --line:#d9dee8;
+  --indigo:#23306b; --sakura:#c9496f; --sakura-soft:#fbe7ee; --warn:#a85a00; --warn-soft:#fff3df;
+  --ok:#2f7d4f; --ok-soft:#e5f4ea; --sign:#ffffff; --sign-ink:#18213d;
+  --f-display:"Secular One","Assistant",system-ui,sans-serif;
+  --f-body:"Assistant",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-jp:"Noto Sans JP","Hiragino Sans","Yu Gothic",sans-serif;
+  --r:14px;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#0f1424; --card:#171d33; --ink:#e8ebf4; --ink-2:#a7afc6; --line:#2a3352;
+  --indigo:#9fb0ff; --sakura:#f08aa8; --sakura-soft:#3a1f2c; --warn:#f2b45c; --warn-soft:#33270f;
+  --ok:#7fd3a0; --ok-soft:#14301f; --sign:#1d2440; --sign-ink:#eef0f7; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#0f1424; --card:#171d33; --ink:#e8ebf4; --ink-2:#a7afc6; --line:#2a3352;
+  --indigo:#9fb0ff; --sakura:#f08aa8; --sakura-soft:#3a1f2c; --warn:#f2b45c; --warn-soft:#33270f;
+  --ok:#7fd3a0; --ok-soft:#14301f; --sign:#1d2440; --sign-ink:#eef0f7; color-scheme:dark}
+html,body{background:var(--paper)}
+body{color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.55;direction:rtl}
+*{box-sizing:border-box}
+.wrap{max-width:720px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:16px calc(96px + env(safe-area-inset-bottom,0px))}
+h1,h2,h3{font-family:var(--f-display);font-weight:400;line-height:1.2;text-wrap:balance;margin:0}
+h1{font-size:1.75rem} h2{font-size:1.35rem} h3{font-size:1.1rem}
+a{color:var(--indigo)}
+.jp{font-family:var(--f-jp)}
+.muted{color:var(--ink-2)}
+.small{font-size:.875rem}
+.top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px}
+.brand small{display:block;color:var(--ink-2);font-size:.85rem;font-family:var(--f-body)}
+.btn{font:inherit;font-weight:700;border:1.5px solid var(--indigo);background:transparent;color:var(--indigo);border-radius:999px;padding:8px 14px;cursor:pointer;white-space:nowrap}
+.btn.solid{background:var(--sakura);border-color:var(--sakura);color:#fff}
+.btn:focus-visible,button:focus-visible,a:focus-visible,textarea:focus-visible,input:focus-visible{outline:3px solid var(--sakura);outline-offset:2px}
+section.view{display:flex;flex-direction:column;gap:16px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:16px}
+.stack{display:flex;flex-direction:column;gap:10px}
+
+/* station sign */
+.sign{background:var(--sign);color:var(--sign-ink);border:2px solid var(--ink);border-radius:10px;overflow:hidden}
+.sign-head{display:flex;justify-content:space-between;align-items:center;padding:8px 14px;font-weight:700;font-size:.9rem;border-bottom:1px solid var(--line)}
+.sign-head .num{font-family:var(--f-display);font-size:1rem}
+.sign-main{padding:14px 14px 10px;text-align:center}
+.sign-main .city{font-family:var(--f-display);font-size:2.1rem;line-height:1.1}
+.sign-main .jpn{font-family:var(--f-jp);font-weight:700;font-size:1.05rem;letter-spacing:.25em;color:var(--ink-2)}
+.sign-main .tag{margin-top:6px;font-weight:600}
+.sign-bar{height:10px;background:var(--sakura)}
+.sign-foot{display:flex;justify-content:space-between;padding:8px 14px;font-size:.85rem;color:var(--ink-2);gap:8px}
+.sign-foot span{min-width:0}
+
+.stops{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+.stop{display:grid;grid-template-columns:62px 1fr;gap:10px;padding:12px 0;border-top:1px dashed var(--line)}
+.stop:first-child{border-top:0}
+.stop .t{font-weight:700;color:var(--indigo);font-size:.85rem;padding-top:2px}
+.stop .b{min-width:0}
+.stop .n{font-weight:700}
+.stop .d{color:var(--ink-2);font-size:.92rem}
+.chiplinks{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.chiplinks a{font-size:.8rem;font-weight:700;text-decoration:none;border:1px solid var(--line);border-radius:999px;padding:3px 10px;color:var(--indigo);background:var(--paper)}
+.alert{border-radius:10px;padding:10px 12px;font-size:.92rem;display:flex;gap:8px;align-items:flex-start}
+.alert b{white-space:nowrap}
+.alert.warn{background:var(--warn-soft);color:var(--ink)} .alert.warn b{color:var(--warn)}
+.alert.food{background:var(--sakura-soft)} .alert.food b{color:var(--sakura)}
+.alert.ok{background:var(--ok-soft)} .alert.ok b{color:var(--ok)}
+.meta{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;font-size:.92rem}
+.meta dt{font-weight:700;color:var(--ink-2)} .meta dd{margin:0;min-width:0}
+textarea{width:100%;min-height:72px;font:inherit;font-size:.95rem;border:1px solid var(--line);border-radius:10px;padding:10px;background:var(--paper);color:var(--ink);resize:vertical}
+.savestate{font-size:.78rem;color:var(--ink-2)}
+
+/* day list */
+.daylist{display:flex;flex-direction:column;gap:8px}
+.dayrow{display:grid;grid-template-columns:56px 1fr auto;align-items:center;gap:12px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 12px;cursor:pointer;text-align:right;font:inherit;color:inherit;width:100%}
+.dayrow .dd{font-family:var(--f-display);font-size:1.15rem;line-height:1;text-align:center}
+.dayrow .dd small{display:block;font-family:var(--f-body);font-size:.75rem;color:var(--ink-2);margin-top:3px}
+.dayrow .tt{min-width:0}
+.dayrow .tt b{display:block}
+.dayrow .tt span{font-size:.85rem;color:var(--ink-2)}
+.dayrow .flag{font-size:.75rem;font-weight:700;color:var(--warn);background:var(--warn-soft);border-radius:999px;padding:2px 8px;white-space:nowrap}
+.dayrow.today{border-color:var(--sakura);box-shadow:0 0 0 2px var(--sakura) inset}
+
+/* bookings */
+.chk{display:grid;grid-template-columns:28px 1fr;gap:10px;padding:12px 0;border-top:1px solid var(--line);align-items:start}
+.chk:first-child{border-top:0}
+.chk input{width:22px;height:22px;margin:2px 0 0;accent-color:var(--ok)}
+.chk .w{font-size:.82rem;font-weight:700;color:var(--sakura)}
+.chk.done .n{text-decoration:line-through;color:var(--ink-2)}
+.chk label{cursor:pointer}
+.chk .n{font-weight:700}
+.chk .d{font-size:.9rem;color:var(--ink-2)}
+.group-h{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.progress{height:8px;background:var(--line);border-radius:99px;overflow:hidden}
+.progress i{display:block;height:100%;background:var(--ok);width:0}
+
+.count{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.count .big{font-family:var(--f-display);font-size:3rem;line-height:1;color:var(--sakura);font-variant-numeric:tabular-nums}
+.phr{display:grid;grid-template-columns:1fr;gap:2px;padding:10px 0;border-top:1px solid var(--line)}
+.phr:first-child{border-top:0}
+.phr .jp{font-size:1.15rem;font-weight:700;direction:ltr;text-align:right}
+.phr .ro{font-size:.85rem;color:var(--ink-2);direction:ltr;text-align:right}
+.num-big{font-family:var(--f-display);font-size:2rem;direction:ltr;display:inline-block}
+.em-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+.em{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px}
+.em .lbl{font-weight:700;font-size:.9rem}
+.copy{font:inherit;font-size:.8rem;font-weight:700;border:1px solid var(--line);background:var(--paper);color:var(--indigo);border-radius:999px;padding:2px 10px;cursor:pointer;margin-top:4px}
+ul.clean{margin:0;padding-inline-start:20px;display:flex;flex-direction:column;gap:6px}
+
+/* bottom nav */
+nav.tabs{position:fixed;inset:auto 0 0 0;background:var(--card);border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(5,1fr);padding-bottom:env(safe-area-inset-bottom,0px);padding-left:env(safe-area-inset-left,0px);padding-right:env(safe-area-inset-right,0px);z-index:20}
+nav.tabs button{font:inherit;font-size:.78rem;font-weight:700;background:none;border:0;color:var(--ink-2);padding:8px 2px 10px;display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer}
+nav.tabs button .ic{font-family:var(--f-jp);font-size:1.15rem;line-height:1.2}
+nav.tabs button[aria-selected="true"]{color:var(--sakura)}
+nav.tabs button[aria-selected="true"] .ic{color:var(--sakura)}
+
+/* celiac card overlay */
+#card{position:fixed;inset:0;z-index:50;background:#fffdf8;color:#111;overflow:auto;padding:calc(20px + env(safe-area-inset-top,0px)) max(20px,env(safe-area-inset-right,0px)) calc(24px + env(safe-area-inset-bottom,0px)) max(20px,env(safe-area-inset-left,0px))}
+#card .inner{max-width:640px;margin:0 auto;direction:ltr;text-align:left}
+#card h2{font-family:var(--f-jp);font-weight:700;font-size:2rem;color:#b3123d;margin-bottom:10px}
+#card p,#card li{font-family:var(--f-jp);font-size:1.25rem;line-height:1.7;margin:0 0 10px}
+#card ul{padding-left:1.2em;margin:0 0 12px}
+#card .ng{border:3px solid #b3123d;border-radius:12px;padding:12px 14px;margin:12px 0}
+#card .okk{border:3px solid #2f7d4f;border-radius:12px;padding:12px 14px;margin:12px 0}
+#card .close{position:sticky;top:0;float:right;font:700 1rem var(--f-body);background:#18213d;color:#fff;border:0;border-radius:999px;padding:10px 16px;cursor:pointer;direction:rtl}
+#card .heb{direction:rtl;text-align:right;font-family:var(--f-body);font-size:.95rem;color:#555;border-top:1px solid #ddd;padding-top:10px;margin-top:16px}
+@media (prefers-reduced-motion:no-preference){.view{animation:fade .18s ease-out}@keyframes fade{from{opacity:.4}to{opacity:1}}}
+</style>
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header class="top">
+    <div class="brand"><h1>יפן <span class="jp">日本</span></h1><small>טיול בת המצווה · 13 עד 24 באפריל 2027</small></div>
+    <button class="btn solid" id="openCard" type="button">כרטיס צליאק</button>
+  </header>
+
+  <section class="view" id="v-today"></section>
+  <section class="view" id="v-route" hidden></section>
+  <section class="view" id="v-book" hidden></section>
+  <section class="view" id="v-food" hidden></section>
+  <section class="view" id="v-sos" hidden></section>
+  <p class="small muted" id="syncNote" style="margin-top:20px"></p>
+</div>
+
+<nav class="tabs" role="tablist">
+  <button role="tab" data-v="today" aria-selected="true"><span class="ic">今日</span>היום</button>
+  <button role="tab" data-v="route" aria-selected="false"><span class="ic">旅程</span>מסלול</button>
+  <button role="tab" data-v="book" aria-selected="false"><span class="ic">予約</span>הזמנות</button>
+  <button role="tab" data-v="food" aria-selected="false"><span class="ic">食事</span>אוכל</button>
+  <button role="tab" data-v="sos" aria-selected="false"><span class="ic">緊急</span>חירום</button>
+</nav>
+
+<div id="card" hidden role="dialog" aria-label="כרטיס צליאק ביפנית">
+  <div class="inner">
+    <button class="close" id="closeCard" type="button">סגירה</button>
+    <h2>セリアック病のお願い</h2>
+    <p><b>私はセリアック病です。</b>グルテン（小麦・大麦・ライ麦）をほんの少しでも食べると、体調が悪くなります。アレルギーと同じように注意が必要です。</p>
+    <div class="ng">
+      <p><b>食べられないもの：</b></p>
+      <ul>
+        <li>小麦粉・パン粉・天ぷらやフライの衣</li>
+        <li>普通の醤油（小麦が入っています）・麺つゆ・ソース・カレールー</li>
+        <li>うどん・ラーメン・そば（小麦入り）・パン</li>
+        <li>麦味噌・麦茶（大麦）</li>
+        <li>同じ油で揚げたもの・同じ調理器具で作ったもの</li>
+      </ul>
+    </div>
+    <div class="okk">
+      <p><b>食べられるもの：</b>白いご飯、肉、魚、卵、野菜、果物、塩、小麦不使用の醤油</p>
+    </div>
+    <p>この料理に小麦や大麦が入っていないか、確認していただけますか？</p>
+    <p>ご協力ありがとうございます。</p>
+    <div class="heb">בעברית: יש לי צליאק. אני לא יכולה לאכול חיטה, שעורה ושיפון, גם לא בכמות קטנה. לא רוטב סויה רגיל, לא ציפוי טמפורה, לא נודלס רגילים, לא מיסו שעורה ולא תה שעורה (מוגיצ'ה). גם לא מזון שטוגן באותו שמן. אפשר: אורז לבן, בשר, דג, ביצה, ירקות, פירות, מלח, סויה ללא חיטה. אפשר לבדוק בבקשה שאין חיטה או שעורה במנה? תודה.</div>
+  </div>
+</div>
+
+<script>
+(function(){
+"use strict";
+var TRIP_START="2027-04-13", TRIP_END="2027-04-24";
+var WD=["א'","ב'","ג'","ד'","ה'","ו'","ש'"];
+function maps(q){return "https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(q);}
+
+/* ===== Days ===== */
+var DAYS=[
+{n:1,date:"2027-04-13",city:"טוקיו",jp:"東京",title:"נחיתה והתאקלמות",
+ stops:[
+  {t:"נחיתה",n:"שדה התעופה בטוקיו",d:"נריטה או הנדה, לפי הטיסה. להפעיל eSIM עוד במטוס, לקנות או לטעון כרטיס תחבורה נטען (Suica / PASMO) לכל אחד."},
+  {t:"אחה\"צ",n:"צ'ק אין ב-MIMARU, חדר פוקימון עם מטבחון",d:"המלצה: סניף Ikebukuro, באותו אזור של Pokémon Center Mega Tokyo. חדרי פוקימון יש גם ב-Ueno East, Hatchobori, Ginza East ו-Kinshicho.",m:"MIMARU Tokyo Ikebukuro"},
+  {t:"ערב",n:"סופר וקונביני למטבחון",d:"להצטייד לבוקר: אורז, ביצים, פירות, יוגורט. בכל מוצר ארוז לחפש על תווית האלרגנים את הסימן 小麦 (חיטה)."}
+ ],
+ food:"ארוחת ערב במטבחון בחדר: הכי בטוח לערב הראשון אחרי טיסה.",
+ sleep:"MIMARU (חדר פוקימון)"},
+{n:2,date:"2027-04-14",city:"טוקיו",jp:"原宿・渋谷",title:"האראג'וקו, בתי קפה של חיות, שיבויה",
+ stops:[
+  {t:"10:00",n:"רחוב טאקשיטה",d:"בבוקר עוד אין המון. בבתי הקפה של הקונספט: שתייה בלבד.",m:"Takeshita Street Harajuku"},
+  {t:"לפי הזמנה",n:"mipig cafe (חזירונים)",d:"הזמנה מראש חובה דרך האתר, מזומן בלבד. פתוח 10:00 עד 20:00. כתובת: Jingumae 1-15-4. להגיע 10 דקות לפני.",m:"mipig cafe Harajuku",l:"https://mipig.cafe/en/locations/harajuku/"},
+  {t:"גמיש",n:"Cat Cafe MOCHA Harajuku (חתולים)",d:"בלי הזמנה, 10:00 עד 21:00. קומה 4 בבניין Cross Avenue מול תחנת JR Harajuku (מעל Matsumoto Kiyoshi). זמן האוכל של החתולים ב-10:30 וב-19:00.",m:"Cat Cafe MOCHA Harajuku",l:"https://catmocha.jp/en/shop/harajuku/"},
+  {t:"צהריים",n:"Gluten Free T's Kitchen, סניף Harajuku",d:"\"איזאקאיה ללא גלוטן\" במרתף, Jingumae 4-28-14. המסעדה כותבת שבמפעל שלה מטפלים גם בחיטה ומבקשת מאנשים רגישים במיוחד לשאול. אפשר להזמין שולחן ב-TableCheck.",m:"Gluten Free T's Kitchen Harajuku",l:"https://www.tablecheck.com/glutenfree-harajuku"},
+  {t:"שקיעה",n:"Shibuya Sky",d:"כרטיס לשעה מסוימת. שעת השקיעה היא הכי מבוקשת. מחובר ישירות לתחנת שיבויה, ואחרי זה מעבר החצייה המפורסם.",m:"Shibuya Sky"}
+ ],
+ alerts:[{k:"warn",b:"כרטיסים",x:"Shibuya Sky נפתח למכירה 2 עד 4 שבועות מראש בחצות שעון יפן, והאתר הרשמי דוחה לא מעט כרטיסי אשראי זרים. לשקול לקנות דרך Klook."}],
+ food:"T's Kitchen בצהריים. בבתי הקפה של החיות: רק שתייה סגורה.",
+ sleep:"MIMARU"},
+{n:3,date:"2027-04-15",city:"דיסני-סי",jp:"東京ディズニーシー",title:"יום מלא בטוקיו דיסני-סי",
+ stops:[
+  {t:"לפני פתיחה",n:"להגיע לשער לפני הפתיחה",d:"לפתוח את אפליקציית Tokyo Disney Resort ולבדוק תורים. האזור הכי מבוקש: Fantasy Springs.",m:"Tokyo DisneySea"},
+  {t:"צהריים",n:"הפסקה מוקדמת",d:"לאכול לפני 12:00 או אחרי 14:00 כדי לחסוך תורים."},
+  {t:"ערב",n:"הנמל בחושך",d:"דיסני-סי הכי יפה בערב. להישאר למופע הערב."}
+ ],
+ alerts:[{k:"warn",b:"כרטיסים",x:"אין מכירה בשער. כרטיס ליום מסוים נפתח בערך חודשיים מראש (לפי המקורות: 60 יום לפני, ב-14:00 שעון יפן). ל-15.04 זה יוצא בערך 14.02.2027 ב-07:00 שעון ישראל."},
+        {k:"warn",b:"תורים",x:"ה-Priority Pass החינמי הופסק ב-2026. לבדוק לפני הטיול מה קיים בתשלום (Premier Access)."}],
+ food:"לבדוק מראש את מידע האלרגנים באפליקציה ובאתר של טוקיו דיסני, ולהביא חטיפים בטוחים לכל היום.",
+ sleep:"MIMARU"},
+{n:4,date:"2027-04-16",city:"טוקיו",jp:"東京",title:"ג'יבלי או פוקימון, לאטה תלת-ממד, אקיהברה",
+ stops:[
+  {t:"בוקר",n:"אפשרות א': מוזיאון ג'יבלי (מיטאקה)",d:"רק עם כרטיס מראש לשעה מסוימת. סגור בימי שלישי (16.04 הוא יום שישי, תקין). עד 6 כרטיסים להזמנה, בלי החזרים ובלי שינוי תאריך. תחנה: Mitaka על קו JR Chuo.",m:"Ghibli Museum Mitaka",l:"https://ghibli-museum.jp/en/tickets"},
+  {t:"בוקר",n:"אפשרות ב': Pokémon Center Mega Tokyo",d:"בקניון Sunshine City באיקבוקורו, ליד המלון. בלי לחץ של כרטיסים.",m:"Pokemon Center Mega Tokyo Sunshine City"},
+  {t:"לפי הזמנה",n:"HATCOFFEE, לאטה תלת-ממד",d:"מראים לבריסטה תמונה (דמות, חיה) והוא בונה אותה מקצף. Kotobuki 3-15-6, ליד אסקוסה. 11:00 עד 18:00, סגור ברביעי, צריך הזמנה ב-TableCheck. גיבוי: דוכן הטייק-אווי שלהם ליד תחנת אסקוסה.",m:"HATCOFFEE Kotobuki Taito",l:"https://www.tablecheck.com/en/hatcoffee"},
+  {t:"אחה\"צ",n:"אקיהברה",d:"חנויות אנימה, משחקים ומכונות קפסולות."},
+  {t:"ערב",n:"Gluten Free T's Kitchen, סניף Roppongi",d:"כל התפריט ללא גלוטן: ראמן, גיוזה מקמח אורז, טמפורה, אוקונומיאקי, קראאגה. Roppongi 7-8-5 קומה 2, 12:00 עד 22:00, סגור בשלישי.",m:"Gluten Free T's Kitchen Roppongi"}
+ ],
+ alerts:[{k:"warn",b:"עומס",x:"מיטאקה במערב, אסקוסה ואקיהברה במזרח, רופונגי במרכז. אם בוחרים בג'יבלי, לשקול להעביר את HATCOFFEE ליום 2."},
+        {k:"ok",b:"טיפ",x:"הערב לשלוח את המזוודות הגדולות בשירות משלוח מזוודות (takkyubin) מהקבלה של המלון ישירות למלון בקיוטו, ולנסוע 17 עד 19 עם תיק קטן. שלושה ימים של רכבות, אוטובוסים ושבילים בלי לסחוב מזוודות."}],
+ food:"ארוחת ערב בטוחה ב-T's Kitchen רופונגי. לשריין שולחן.",
+ sleep:"MIMARU (לילה אחרון בטוקיו)"},
+{n:5,date:"2027-04-17",city:"נאגאנו",jp:"長野・地獄谷",title:"שינקנסן לנאגאנו, קופי השלג, מאצומוטו",
+ stops:[
+  {t:"בוקר",n:"שינקנסן Hokuriku מטוקיו לנאגאנו",d:"בערך 90 דקות. רכבות Kagayaki, Hakutaka או Asama.",m:"Nagano Station"},
+  {t:"",n:"אוטובוס אקספרס לפארק הקופים",d:"מהיציאה המזרחית של תחנת נאגאנו, 40 עד 45 דקות לתחנת Snow Monkey Park. חלופה: רכבת Nagaden ל-Yudanaka ואוטובוס מקומי. יש כרטיס משולב (Snow Monkey Pass) שכולל תחבורה וכניסה."},
+  {t:"",n:"Jigokudani Snow Monkey Park",d:"הליכה של 1.6 ק\"מ ביער, כ-30 דקות לכל כיוון. שעה וחצי עד שעתיים בפארק.",m:"Jigokudani Monkey Park"},
+  {t:"ערב",n:"חזרה לנאגאנו ורכבת למאצומוטו",d:"רכבת Shinano, בערך שעה. בערב: קונביני וקניות לקאמיקוצ'י של מחר.",m:"Matsumoto Station"}
+ ],
+ alerts:[{k:"warn",b:"כרטיסים",x:"מאוגוסט 2026 הפארק עבר לכרטיסים מקוונים לתאריך מסוים. לבדוק לפני הטיול אם זה חל גם באפריל."},
+        {k:"warn",b:"ציפיות",x:"באפריל אין שלג והקופים פחות נכנסים למים החמים. עדיין רואים אותם ממש מקרוב."},
+        {k:"food",b:"קניות לערב",x:"אוניגירי עם מלח בלבד (塩むすび, shio musubi) וחטיפים לכל מחר. רוב האוניגירי האחרים עם סויה רגילה."}],
+ food:"אוכל לדרך מטוקיו. ברכבת ובפארק אין על מה לסמוך.",
+ sleep:"מאצומוטו (טרם הוזמן)"},
+{n:6,date:"2027-04-18",city:"קאמיקוצ'י",jp:"上高地",title:"יום מלא באלפים היפנים",
+ stops:[
+  {t:"מוקדם",n:"רכבת למאצומוטו Shin-Shimashima",d:"קו Alpico, כ-30 דקות. כרטיסי IC לא מתקבלים בקו הזה, להכין מזומן.",m:"Shin-Shimashima Station"},
+  {t:"",n:"אוטובוס לטרמינל קאמיקוצ'י",d:"כשעה. רכב פרטי אסור בכניסה כל השנה.",m:"Kamikochi Bus Terminal"},
+  {t:"",n:"גשר Kappabashi ובריכת Taisho",d:"שבילים שטוחים ומסודרים, מתאים לכולם. מ-Kappabashi אפשר להמשיך לאזור Myojin.",m:"Kappabashi Kamikochi"},
+  {t:"אחה\"צ",n:"לחזור לאוטובוס בזמן",d:"האוטובוס האחרון החוצה יוצא בערך ב-17:55, וזה משתנה לפי התאריך. לבדוק בטרמינל בבוקר."}
+ ],
+ alerts:[{k:"warn",b:"פתיחת העונה",x:"הכביש נפתח בדרך כלל ב-17 באפריל וטקס הפתיחה ב-27. תאריכי 2027 טרם פורסמו. ביום השני של העונה רוב העסקים עוד סגורים."},
+        {k:"warn",b:"מזג אוויר",x:"גובה 1,500 מטר, בערך 9 מעלות קר יותר מטוקיו, ואפשר שלג. שכבות, כפפות, נעלי הליכה. יום ראשון: צפוי עומס."},
+        {k:"food",b:"אוכל",x:"אין שם אוכל ללא גלוטן. כל האוכל ליום הזה נקנה אתמול במאצומוטו."}],
+ food:"מה שנקנה אתמול: אוניגירי מלח, פירות, חטיפים בטוחים, מים.",
+ sleep:"מאצומוטו"},
+{n:7,date:"2027-04-19",city:"נאגויה",jp:"名古屋",title:"מאצומוטו לנאגויה, לגולנד",
+ stops:[
+  {t:"בוקר",n:"רכבת Shinano ממאצומוטו לנאגויה",d:"בערך שעתיים."},
+  {t:"",n:"קו Aonami לתחנת Kinjo-futo",d:"8 דקות הליכה למלון. להשאיר תיקים בקבלה ולהיכנס לפארק.",m:"LEGOLAND Japan Hotel"},
+  {t:"היום",n:"LEGOLAND Japan",d:"לפי אתר לגולנד, אורחי המלון נכנסים לפארק ול-SEA LIFE ביום ההגעה וגם למחרת. כדאי לחלק את הפארק לשני ימים.",m:"LEGOLAND Japan",l:"https://www.legoland.jp/en/operation/info/opening-hours/"},
+  {t:"16:00",n:"צ'ק אין במלון לגולנד",d:"יש בחדר משחקים ואזור משחקי מים לאורחים."}
+ ],
+ alerts:[{k:"warn",b:"ימי סגירה",x:"מלון לגולנד סגור בימי רביעי וראשון (19.04 הוא יום שני, תקין). לפארק יש ימי סגירה משלו: לבדוק את לוח הפעילות כשיפורסם."}],
+ food:"ארוחת בוקר במלון עם הכנה נפרדת ללא גלוטן. בפארק יש מסעדות עם תפריט מופחת אלרגנים, ובעיקרון אסור להכניס אוכל.",
+ sleep:"LEGOLAND Japan Hotel"},
+{n:8,date:"2027-04-20",city:"קיוטו",jp:"京都",title:"פושימי אינארי וגיון",
+ stops:[
+  {t:"בוקר",n:"עוד סיבוב בלגולנד או SEA LIFE",d:"הכניסה של היום כלולה. לצאת עד הצהריים."},
+  {t:"צהריים",n:"שינקנסן מנאגויה לקיוטו",d:"בערך 35 דקות. המזוודות מחכות במלון בקיוטו אם נשלחו מטוקיו."},
+  {t:"אחה\"צ",n:"Fushimi Inari Taisha",d:"אלפי שערי טורי כתומים. לא חייבים לטפס עד הסוף: נקודת התצפית Yotsutsuji באמצע הדרך מספיקה.",m:"Fushimi Inari Taisha"},
+  {t:"ערב",n:"סיור ברובע גיון",d:"Hanamikoji ושירקאווה בשעת בין ערביים.",m:"Hanamikoji Gion Kyoto"}
+ ],
+ alerts:[{k:"ok",b:"הצעה",x:"מוזיאון המנגה סגור מחר (רביעי) אבל פתוח היום. אם רוצים אותו, אפשר להכניס אותו היום אחה\"צ במקום פושימי אינארי, ולעשות את פושימי אינארי מחר מוקדם בבוקר."}],
+ food:"לבדוק ב-Find Me Gluten Free מקומות ליד המלון בקיוטו. להשתמש בכרטיס הצליאק.",
+ sleep:"קיוטו (טרם הוזמן)"},
+{n:9,date:"2027-04-21",city:"קיוטו",jp:"嵐山",title:"אראשיאמה",
+ flag:"להחליט",
+ stops:[
+  {t:"מוקדם",n:"יער הבמבוק באראשיאמה",d:"לפני 8:00 עוד אפשר לצלם בלי אנשים.",m:"Arashiyama Bamboo Grove"},
+  {t:"להחליט",n:"פארק הקופים Iwatayama",d:"עלייה של כ-20 דקות בשביל. כבר ראיתם קופים ב-17.04, אז זה פתוח להחלטה משותפת.",m:"Iwatayama Monkey Park"},
+  {t:"להחליט",n:"מוזיאון המנגה הבינלאומי",d:"סגור בכל יום רביעי, כלומר סגור ב-21.04. אם רוצים אותו: להעביר ל-20.04.",m:"Kyoto International Manga Museum"}
+ ],
+ alerts:[{k:"warn",b:"סגור היום",x:"מוזיאון המנגה סגור בימי רביעי. בלי שינוי, היום הזה יוצא קצר."}],
+ food:"אזור אראשיאמה מלא באוכל רחוב שלא מתאים. להביא חטיפים.",
+ sleep:"קיוטו"},
+{n:10,date:"2027-04-22",city:"נארה",jp:"奈良・大阪",title:"נארה ואוסקה",
+ stops:[
+  {t:"בוקר",n:"רכבת מקיוטו לנארה",d:"Kintetsu או JR Nara Line. מזוודות: לוקרים בתחנה או משלוח ישר למלון באוסקה."},
+  {t:"",n:"פארק האיילים",d:"עוגיות האיילים (shika senbei) עשויות בין השאר מקמח חיטה. מאכילים אותן, לא אוכלים, ושוטפים ידיים אחרי.",m:"Nara Park"},
+  {t:"",n:"מקדש Todai-ji",d:"פסל הבודהה הגדול.",m:"Todai-ji"},
+  {t:"אחה\"צ",n:"רכבת לאוסקה",d:"Kintetsu ישירה מנארה ל-Osaka Namba."},
+  {t:"ערב",n:"דוטונבורי ו-OKO Takoyaki",d:"OKO קטנה מאוד (10 עד 12 מקומות) ויש תור. ליד Shinsaibashi. התפריט כרגע טאקויאקי ותוספות בלבד (אוקונומיאקי נמצא במסעדה אחרת, OKO Okonomiyaki Bar).",m:"OKO Takoyaki Osaka"}
+ ],
+ alerts:[{k:"food",b:"דוטונבורי",x:"אוכל הרחוב בדוטונבורי (טאקויאקי, קושיקאטסו) עשוי עם קמח חיטה. לאכול רק ב-OKO. גם שם, לפי ביקורות, יש מנה אחת עם שומשום שאינה ללא גלוטן: לשאול."}],
+ food:"OKO Takoyaki: כמעט כל התפריט טבעוני וללא גלוטן, ויש בירה ללא גלוטן.",
+ sleep:"אוסקה (טרם נקבע: מומלץ Hotel Universal Port לשני לילות)"},
+{n:11,date:"2027-04-23",city:"אוסקה",jp:"ユニバーサル",title:"יוניברסל סטודיוז יפן",
+ stops:[
+  {t:"לפני פתיחה",n:"להגיע לשער מוקדם",d:"הכרטיסים מוטענים מראש באפליקציה הרשמית של USJ.",m:"Universal Studios Japan"},
+  {t:"לפי שעה",n:"Super Nintendo World",d:"כניסה לפי שעה. בלי Express Pass שכולל את נינטנדו, משיגים כרטיס כניסה מתוזמן באפליקציה ממש עם הפתיחה."},
+  {t:"",n:"העולם של הארי פוטר",d:"לפי מקורות עדכניים, כבר לא צריך שם כניסה מתוזמנת."},
+  {t:"ערב",n:"מלון המיניונים",d:"Hotel Universal Port, 4 דקות הליכה מהפארק. צ'ק אין מ-15:00, לוקרים חינם לאורחים.",m:"Hotel Universal Port"}
+ ],
+ alerts:[{k:"warn",b:"Express Pass",x:"Express Pass לא כולל כרטיס כניסה, זה כרטיס נוסף. לבחור גרסה שכוללת כניסה מובטחת ל-Super Nintendo World. מאז ינואר 2026 צריך את האפליקציה כדי לקבל כרטיסי כניסה מתוזמנים."}],
+ food:"לבדוק מידע אלרגנים של USJ מראש ולהביא חטיפים. ארוחת בוקר במלון: לפנות למלון מראש לגבי מגבלות תזונה.",
+ sleep:"Hotel Universal Port (חדר מיניונים)"},
+{n:12,date:"2027-04-24",city:"חזרה",jp:"帰国",title:"טיסה הביתה",
+ flag:"להחליט",
+ stops:[
+  {t:"מומלץ",n:"טיסה מקנסאי (KIX) באוסקה",d:"הטיסה עוד לא הוזמנה: כרטיס הלוך לטוקיו וחזור מאוסקה חוסך את כל היום הזה ברכבת.",m:"Kansai International Airport"},
+  {t:"התוכנית",n:"שינקנסן לטוקיו וטיסה",d:"כ-2.5 שעות שינקנסן ועוד נסיעה לשדה. אם נשארים עם זה: לצאת מאוסקה לפחות 5 עד 6 שעות לפני הטיסה."}
+ ],
+ alerts:[{k:"warn",b:"סיכון",x:"תקלה ברכבת ביום הטיסה עלולה לעלות בטיסה. זו הנקודה הכי שבירה במסלול."}],
+ food:"ארוחה אחרונה במלון או אוכל ארוז בטוח לטיסה. לבקש ארוחה ללא גלוטן (GFML) בהזמנת הטיסה.",
+ sleep:"הבית"}
+];
+
+/* ===== Bookings ===== */
+var BOOK=[
+ {g:"עכשיו",items:[
+  {id:"flights",n:"טיסות",w:"עכשיו",d:"מומלץ הלוך לטוקיו וחזור מקנסאי (KIX). לבקש ארוחה ללא גלוטן (GFML)."},
+  {id:"mimaru",n:"MIMARU טוקיו, חדר פוקימון, 4 לילות (13 עד 17)",w:"עכשיו",d:"מספר החדרים מוגבל. המלצה: סניף Ikebukuro.",l:"https://mimaruhotels.com/"},
+  {id:"matsumoto",n:"מלון במאצומוטו, 2 לילות (17 עד 19)",w:"עכשיו",d:"קרוב לתחנה: שתי יציאות מוקדמות ברכבת."},
+  {id:"lego",n:"LEGOLAND Japan Hotel, לילה אחד (19)",w:"עכשיו",d:"כולל ארוחת בוקר וכניסה לפארק ביום ההגעה ולמחרת.",l:"https://www.legoland.jp/en/"},
+  {id:"kyoto",n:"לינה בקיוטו, 2 לילות (20 עד 22)",w:"עכשיו",d:"אביב זו עונה עמוסה. ל-MIMARU יש חדרי פוקימון גם בקיוטו."},
+  {id:"usjhotel",n:"Hotel Universal Port, חדר מיניונים",w:"עכשיו",d:"לשקול שני לילות (22 ו-23) כדי לא לעבור מלון. יש מעט חדרי מיניונים בכל לילה.",l:"https://universalport.orixhotelsandresorts.com/"},
+  {id:"insurance",n:"ביטוח נסיעות",w:"עם הטיסות",d:"לשמור את פרטי הפוליסה באפליקציה של חברת הביטוח, לא באתר הזה."}
+ ]},
+ {g:"לפי תאריך פתיחה",items:[
+  {id:"disney",n:"כרטיסי דיסני-סי ל-15.04",w:"בערך 14.02.2027, 07:00 שעון ישראל",due:"2027-02-14",d:"נפתח כחודשיים מראש (לפי המקורות: 60 יום, 14:00 שעון יפן).",l:"https://www.tokyodisneyresort.jp/en/"},
+  {id:"ghibli",n:"כרטיסי מוזיאון ג'יבלי ל-16.04 (אם בוחרים בו)",w:"10.03.2027, 03:00 לפנות בוקר שעון ישראל",due:"2027-03-10",d:"10:00 שעון יפן, ב-Lawson Ticket. נגמר תוך שעה בערך. לשים שעון מעורר, אשראי מוכן.",l:"https://ghibli-museum.jp/en/tickets"},
+  {id:"sky",n:"Shibuya Sky לשקיעה ב-14.04",w:"2 עד 4 שבועות לפני (סוף מרץ)",due:"2027-03-17",d:"נפתח בחצות שעון יפן. האתר הרשמי דוחה הרבה כרטיסים זרים.",l:"https://www.shibuya-scramble-square.com/sky/"},
+  {id:"usj",n:"USJ: כרטיס כניסה + Express Pass עם נינטנדו",w:"ברגע שהתאריכים סגורים",due:"2027-01-15",d:"שני כרטיסים נפרדים. לוודא שה-Express כולל כניסה מובטחת ל-Super Nintendo World.",l:"https://www.usj.co.jp/web/en/us"},
+  {id:"jigoku",n:"פארק הקופים Jigokudani: לבדוק אם צריך כרטיס מקוון",w:"מרץ 2027",due:"2027-03-01",d:"מאוגוסט 2026 יש כרטיסים לתאריך מסוים.",l:"https://www.snowmonkeyresorts.com/access/nagaden-local-bus/"},
+  {id:"kami",n:"קאמיקוצ'י: לוודא תאריך פתיחה 2027",w:"פברואר עד מרץ 2027",due:"2027-02-28",d:"בדרך כלל 17 באפריל.",l:"https://www.kamikochi.org/"},
+  {id:"legocal",n:"לגולנד: לבדוק ימי סגירה של הפארק",w:"כשהלוח יפורסם",due:"2027-02-01",l:"https://www.legoland.jp/en/operation/info/opening-hours/"},
+  {id:"mipig",n:"הזמנה ל-mipig Harajuku (14.04)",w:"כשנפתח באתר",due:"2027-03-20",d:"הזמנה באתר בלבד, מזומן בלבד.",l:"https://mipig.cafe/en/locations/harajuku/"},
+  {id:"hat",n:"הזמנה ל-HATCOFFEE (16.04)",w:"כשנפתח ב-TableCheck",due:"2027-03-20",l:"https://www.tablecheck.com/en/hatcoffee"},
+  {id:"tskitchen",n:"שולחנות ב-T's Kitchen (14.04 Harajuku, 16.04 Roppongi)",w:"מרץ 2027",due:"2027-03-25",l:"https://www.tablecheck.com/glutenfree-harajuku"}
+ ]},
+ {g:"החלטות פתוחות",items:[
+  {id:"d-ghibli",n:"16.04: ג'יבלי או איקבוקורו?",w:"לפני 10.03.2027",due:"2027-03-09"},
+  {id:"d-kyoto",n:"21.04: פארק הקופים ומוזיאון המנגה (סגור ברביעי)",w:"לסגור עם אשתי",due:"2027-01-31"},
+  {id:"d-luggage",n:"משלוח מזוודות מטוקיו לקיוטו (16.04)",w:"לפני הטיול"}
+ ]},
+ {g:"שבוע לפני",items:[
+  {id:"esim",n:"eSIM לכל טלפון",w:"שבוע לפני"},
+  {id:"vjw",n:"רישום ב-Visit Japan Web (מכס והגירה)",w:"לפני הטיסה"},
+  {id:"fmgf",n:"אפליקציית Find Me Gluten Free (פרימיום)",w:"לפני הטיסה",l:"https://www.findmeglutenfree.com/"},
+  {id:"cardprint",n:"להדפיס כרטיס צליאק ביפנית (2 עותקים)",w:"לפני הטיסה",d:"יש גרסה מוכנה בכפתור 'כרטיס צליאק' למעלה, וגם ב-Equal Eats."},
+  {id:"soy",n:"לארוז סויה ללא גלוטן וחטיפים בטוחים לימי קאמיקוצ'י ופארקים",w:"לפני הטיסה"},
+  {id:"cash",n:"מזומן ביין",w:"לפני הטיסה",d:"mipig וקו הרכבת לקאמיקוצ'י: מזומן בלבד."}
+ ]}
+];
+
+/* ===== State (shared db with local fallback) ===== */
+var checks={}, notes={}, db=null, canWrite=true;
+function lsGet(k){try{return JSON.parse(localStorage.getItem(k)||"{}")}catch(e){return {}}}
+function lsSet(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
+checks=lsGet("jp-checks"); notes=lsGet("jp-notes");
+
+/* ===== Dates ===== */
+function jstToday(){var d=new Date(Date.now()+9*3600e3);return d.toISOString().slice(0,10);}
+function dParts(iso){var p=iso.split("-");return {y:+p[0],m:+p[1],d:+p[2]};}
+function fmt(iso){var p=dParts(iso);return String(p.d).padStart(2,"0")+"."+String(p.m).padStart(2,"0");}
+function wd(iso){var p=dParts(iso);return WD[new Date(Date.UTC(p.y,p.m-1,p.d)).getUTCDay()];}
+function daysUntil(iso){var a=dParts(jstToday()),b=dParts(iso);return Math.round((Date.UTC(b.y,b.m-1,b.d)-Date.UTC(a.y,a.m-1,a.d))/864e5);}
+
+function esc(s){return String(s==null?"":s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];});}
+
+/* ===== Renderers ===== */
+function signHTML(day){
+  var prev=DAYS[day.n-2], next=DAYS[day.n];
+  return '<div class="sign"><div class="sign-head"><span class="num">יום '+day.n+'</span><span>יום '+wd(day.date)+' · '+fmt(day.date)+'</span></div>'+
+   '<div class="sign-main"><div class="city">'+esc(day.city)+'</div><div class="jpn">'+esc(day.jp)+'</div><div class="tag">'+esc(day.title)+'</div></div>'+
+   '<div class="sign-bar"></div><div class="sign-foot"><span>'+(prev?'→ '+esc(prev.city):'')+'</span><span>'+(next?esc(next.city)+' ←':'')+'</span></div></div>';
+}
+function dayHTML(day){
+  var h=signHTML(day);
+  if(day.alerts&&day.alerts.length){h+='<div class="stack">'+day.alerts.map(function(a){return '<div class="alert '+a.k+'"><b>'+esc(a.b)+'</b><span>'+esc(a.x)+'</span></div>';}).join("")+'</div>';}
+  h+='<div class="card"><ol class="stops">'+day.stops.map(function(s){
+    var links='';
+    if(s.m||s.l){links='<div class="chiplinks">'+(s.m?'<a href="'+maps(s.m)+'" target="_blank" rel="noopener">ניווט</a>':'')+(s.l?'<a href="'+s.l+'" target="_blank" rel="noopener">אתר / הזמנה</a>':'')+'</div>';}
+    return '<li class="stop"><div class="t">'+esc(s.t)+'</div><div class="b"><div class="n">'+esc(s.n)+'</div>'+(s.d?'<div class="d">'+esc(s.d)+'</div>':'')+links+'</div></li>';
+  }).join("")+'</ol></div>';
+  h+='<div class="card"><dl class="meta"><dt>אוכל</dt><dd>'+esc(day.food)+'</dd><dt>לינה</dt><dd>'+esc(day.sleep)+'</dd></dl></div>';
+  h+='<div class="card stack"><label for="note-'+day.n+'"><b>הערות ליום '+day.n+'</b></label><textarea id="note-'+day.n+'" data-note="day-'+day.n+'" placeholder="מספר הזמנה, שעת רכבת, מה לזכור...">'+esc((notes["day-"+day.n]||{}).text||"")+'</textarea><span class="savestate" id="ss-day-'+day.n+'"></span></div>';
+  return h;
+}
+
+function renderToday(){
+  var el=document.getElementById("v-today"), t=jstToday(), h="";
+  if(t<TRIP_START){
+    var n=daysUntil(TRIP_START);
+    h+='<div class="card"><div class="count"><span class="big">'+n+'</span><span><b>ימים לנחיתה בטוקיו</b><br><span class="muted small">13.04.2027 · שעון יפן מקדים את ישראל ב-6 שעות באפריל</span></span></div></div>';
+    var open=[];
+    BOOK.forEach(function(g){g.items.forEach(function(it){if(!(checks[it.id]&&checks[it.id].done))open.push(it);});});
+    var dated=open.filter(function(i){return i.due;}).sort(function(a,b){return a.due<b.due?-1:1;});
+    var now=open.filter(function(i){return i.w==="עכשיו";});
+    h+='<div class="card stack"><div class="group-h"><h2>להזמין עכשיו</h2><span class="muted small">'+now.length+' פתוחים</span></div>'+
+      (now.length?now.map(function(i){return '<div>• '+esc(i.n)+'</div>';}).join(""):'<div class="alert ok"><b>מעולה</b><span>כל מה שצריך להזמין עכשיו סגור.</span></div>')+'</div>';
+    h+='<div class="card stack"><h2>תאריכים קרובים</h2>'+dated.slice(0,5).map(function(i){var d=daysUntil(i.due);return '<div class="chk" style="grid-template-columns:64px 1fr"><div class="w">'+(d>0?'בעוד '+d+' ימים':'הגיע הזמן')+'</div><div><div class="n">'+esc(i.n)+'</div><div class="d">'+esc(i.w)+'</div></div></div>';}).join("")+'<button class="btn" data-go="book" type="button">לכל רשימת ההזמנות</button></div>';
+    h+='<div class="card stack"><h2>נקודות שמצאתי במסלול</h2><ul class="clean">'+
+      '<li><b>24.04:</b> שינקנסן לטוקיו ביום הטיסה. עדיף לחזור מקנסאי (KIX).</li>'+
+      '<li><b>21.04:</b> מוזיאון המנגה סגור בימי רביעי.</li>'+
+      '<li><b>21.04:</b> פארק קופים שני אחרי Jigokudani. להחליט יחד.</li>'+
+      '<li><b>22.04:</b> OKO Takoyaki מגישה כרגע רק טאקויאקי. אוקונומיאקי נמצא ב-OKO Okonomiyaki Bar.</li>'+
+      '<li><b>לינות חסרות:</b> מאצומוטו, קיוטו, ולילה 22 באוסקה.</li>'+
+      '<li><b>JR Pass:</b> כנראה לא משתלם. הפס ל-7 ימים עולה 50,000 ין, וכרטיסים בודדים למסלול הזה יוצאים זולים יותר.</li></ul></div>';
+  } else if(t>TRIP_END){
+    h+='<div class="card"><h2>ברוכים השבים</h2><p class="muted">המסלול נשאר כאן לזיכרון, עם כל ההערות שכתבתם.</p></div>';
+  } else {
+    var day=DAYS.filter(function(d){return d.date===t;})[0];
+    if(day)h+=dayHTML(day);
+  }
+  el.innerHTML=h;
+}
+
+function renderRoute(){
+  var el=document.getElementById("v-route"), t=jstToday();
+  var h='<h2>12 ימים, 7 ערים</h2><div class="daylist">'+DAYS.map(function(d){
+    return '<button class="dayrow'+(d.date===t?' today':'')+'" data-day="'+d.n+'" type="button"><span class="dd">'+fmt(d.date)+'<small>יום '+wd(d.date)+'</small></span><span class="tt"><b>'+esc(d.city)+' · '+esc(d.title)+'</b><span>'+esc(d.sleep)+'</span></span>'+(d.flag?'<span class="flag">'+esc(d.flag)+'</span>':'<span></span>')+'</button>';
+  }).join("")+'</div><div id="dayDetail" class="stack"></div>';
+  el.innerHTML=h;
+}
+function openDay(n){
+  var det=document.getElementById("dayDetail"); var d=DAYS[n-1];
+  det.innerHTML='<button class="btn" id="backList" type="button">חזרה לכל הימים</button>'+dayHTML(d);
+  document.querySelector("#v-route .daylist").hidden=true;
+  document.querySelector("#v-route h2").hidden=true;
+  window.scrollTo(0,0);
+}
+
+function renderBook(){
+  var el=document.getElementById("v-book"), total=0, done=0;
+  BOOK.forEach(function(g){g.items.forEach(function(i){total++;if(checks[i.id]&&checks[i.id].done)done++;});});
+  var h='<div class="card stack"><div class="group-h"><h2>הזמנות ומשימות</h2><span class="muted small">'+done+' מתוך '+total+'</span></div><div class="progress"><i style="width:'+Math.round(done/total*100)+'%"></i></div><span class="muted small">הסימונים נשמרים בטלפון הזה.</span></div>';
+  BOOK.forEach(function(g){
+    h+='<div class="card"><h3 style="margin-bottom:6px">'+esc(g.g)+'</h3>'+g.items.map(function(i){
+      var on=!!(checks[i.id]&&checks[i.id].done);
+      return '<div class="chk'+(on?' done':'')+'"><input type="checkbox" id="c-'+i.id+'" data-check="'+i.id+'"'+(on?' checked':'')+(canWrite?'':' disabled')+'><label for="c-'+i.id+'"><div class="n">'+esc(i.n)+'</div>'+(i.w?'<div class="w">'+esc(i.w)+'</div>':'')+(i.d?'<div class="d">'+esc(i.d)+'</div>':'')+(i.l?'<div class="chiplinks"><a href="'+i.l+'" target="_blank" rel="noopener">לאתר</a></div>':'')+'</label></div>';
+    }).join("")+'</div>';
+  });
+  el.innerHTML=h;
+}
+
+function renderFood(){
+  var el=document.getElementById("v-food");
+  el.innerHTML=
+  '<div class="card stack"><h2>ללא גלוטן ביפן: הכללים</h2><ul class="clean">'+
+   '<li><b>רוטב סויה רגיל מכיל חיטה.</b> הוא נמצא כמעט בכל דבר: אוניגירי, רטבים, מרינדות, ראמן, סושי עם רוטב. לבקש בלי סויה או להביא סויה ללא גלוטן.</li>'+
+   '<li><b>מוגיצ\'ה (麦茶) היא תה שעורה.</b> מגישים אותה בחינם במסעדות רבות כאילו היא מים. לבקש מים (お水, o-mizu).</li>'+
+   '<li><b>מיסו</b> יכול להיות עשוי משעורה (麦味噌). לשאול.</li>'+
+   '<li><b>במוצרים ארוזים</b> חיטה (小麦) היא אלרגן שחובה לסמן על התווית. שעורה לא חייבת להופיע בסימון האלרגנים, אז לקרוא גם את רשימת הרכיבים.</li>'+
+   '<li><b>טיגון:</b> גם מנה בלי ציפוי יכולה להיות מטוגנת באותו שמן של טמפורה.</li>'+
+   '<li><b>בטוח יחסית בקונביני:</b> אוניגירי מלח בלבד (塩むすび), ביצה קשה, פירות, יוגורט. תמיד לבדוק תווית.</li></ul></div>'+
+  '<div class="card stack"><h2>הערות מהתכנון</h2><ul class="clean">'+
+   '<li>בתי קפה של קונספט (פוקימון, קירבי): אין מנות בטוחות. מגיעים לחוויה ולתמונות, שותים רק שתייה סגורה ממכונה.</li>'+
+   '<li>מלון לגולנד: מכינים ארוחת בוקר ללא גלוטן בנפרד.</li>'+
+   '<li>קאמיקוצ\'י: אין שם כלום. מצטיידים יום לפני במאצומוטו.</li></ul></div>'+
+  '<div class="card stack"><h2>מקומות בטוחים במסלול</h2>'+
+   '<div class="chk" style="grid-template-columns:1fr"><div><div class="n">Gluten Free T\'s Kitchen, Roppongi (טוקיו)</div><div class="d">כל התפריט ללא גלוטן. 12:00 עד 22:00, סגור בשלישי. יום 4.</div><div class="chiplinks"><a href="'+maps("Gluten Free T's Kitchen Roppongi")+'" target="_blank" rel="noopener">ניווט</a></div></div></div>'+
+   '<div class="chk" style="grid-template-columns:1fr"><div><div class="n">Gluten Free T\'s Kitchen, Harajuku (טוקיו)</div><div class="d">איזאקאיה ללא גלוטן. המסעדה כותבת שבמפעל שלה מטפלים גם בחיטה. יום 2.</div><div class="chiplinks"><a href="'+maps("Gluten Free T's Kitchen Harajuku")+'" target="_blank" rel="noopener">ניווט</a><a href="https://www.tablecheck.com/glutenfree-harajuku" target="_blank" rel="noopener">הזמנה</a></div></div></div>'+
+   '<div class="chk" style="grid-template-columns:1fr"><div><div class="n">OKO Takoyaki (אוסקה)</div><div class="d">טאקויאקי מסויה, טבעוני וללא גלוטן, ובירה ללא גלוטן. קטן ועם תור. יום 10.</div><div class="chiplinks"><a href="'+maps("OKO Takoyaki Osaka")+'" target="_blank" rel="noopener">ניווט</a></div></div></div>'+
+  '</div>'+
+  '<div class="card"><h2 style="margin-bottom:6px">משפטים שימושיים</h2>'+
+   phr("小麦は入っていますか？","Komugi wa haitte imasu ka?","יש בזה חיטה?")+
+   phr("醤油は使っていますか？","Shōyu wa tsukatte imasu ka?","השתמשתם ברוטב סויה?")+
+   phr("小麦アレルギーがあります。","Komugi arerugī ga arimasu.","יש לי אלרגיה לחיטה (הכי מובן למלצרים).")+
+   phr("お水をください。","O-mizu o kudasai.","מים בבקשה (במקום תה שעורה).")+
+   phr("グルテンフリーのメニューはありますか？","Guruten furī no menyū wa arimasu ka?","יש תפריט ללא גלוטן?")+
+  '</div>'+
+  '<button class="btn solid" data-card="1" type="button">לפתוח את כרטיס הצליאק במסך מלא</button>';
+}
+function phr(j,r,h){return '<div class="phr"><span class="jp">'+j+'</span><span class="ro">'+r+'</span><span>'+h+'</span></div>';}
+
+function renderSOS(){
+  var el=document.getElementById("v-sos");
+  el.innerHTML=
+  '<div class="em-grid">'+
+   em("משטרה","110")+em("אמבולנס וכבאות","119")+
+   em("קו חם לתיירים (JNTO), 24/7, אנגלית","050-3816-2787","מחו\"ל: +81-50-3816-2787")+
+   em("שגרירות ישראל בטוקיו","+81-3-3264-0911","3 Nibancho, Chiyoda-ku. קבלת קהל א\' עד ה\' 10:00 עד 13:00. מתוך יפן: 03-3264-0911")+
+  '</div>'+
+  '<div class="card stack"><h2>אם משהו קורה</h2><ul class="clean">'+
+   '<li><b>מרגישים לא טוב:</b> הקו החם של JNTO עוזר למצוא מרפאה דוברת אנגלית. מידע גם באתר jnto.go.jp/emergency.</li>'+
+   '<li><b>דרכון אבד או נגנב:</b> דיווח במשטרה (קובאן) ואז פנייה לשגרירות להנפקת מסמך חלופי.</li>'+
+   '<li><b>רעידת אדמה:</b> להתרחק מחלונות, להתכסות מתחת לשולחן, ולפעול לפי הוראות הצוות במלון או בתחנה.</li>'+
+   '<li><b>מתפצלים בפארק או בתחנה:</b> לקבוע מראש נקודת מפגש קבועה לכל יום.</li>'+
+   '<li><b>ביטוח:</b> פרטי הפוליסה באפליקציה של חברת הביטוח. לא לשמור באתר הזה מספרי דרכון, פוליסה או אשראי.</li></ul></div>'+
+  '<div class="card stack"><label for="note-sos"><b>טלפונים וכתובות של המלונות</b></label><textarea id="note-sos" data-note="sos" placeholder="שם המלון, כתובת ביפנית, טלפון. נוח להראות לנהג מונית.">'+esc((notes["sos"]||{}).text||"")+'</textarea><span class="savestate" id="ss-sos"></span></div>'+
+  '<div class="card"><h3>שעון</h3><p class="muted" id="clock" style="margin:6px 0 0"></p></div>';
+}
+function em(lbl,num,sub){return '<div class="em"><div class="lbl">'+lbl+'</div><div class="num-big">'+num+'</div>'+(sub?'<div class="small muted">'+sub+'</div>':'')+'<div><button class="copy" type="button" data-copy="'+num+'">העתקה</button></div></div>';}
+
+function tick(){var c=document.getElementById("clock");if(!c)return;var o={hour:"2-digit",minute:"2-digit",hour12:false};
+  try{c.textContent="יפן: "+new Date().toLocaleTimeString("he-IL",Object.assign({timeZone:"Asia/Tokyo"},o))+" · ישראל: "+new Date().toLocaleTimeString("he-IL",Object.assign({timeZone:"Asia/Jerusalem"},o));}catch(e){}}
+
+function renderAll(){renderToday();renderRoute();renderBook();renderFood();renderSOS();tick();}
+
+/* ===== Tabs ===== */
+var current="today";
+function show(v){
+  current=v;
+  document.querySelectorAll("section.view").forEach(function(s){s.hidden=(s.id!=="v-"+v);});
+  document.querySelectorAll("nav.tabs button").forEach(function(b){b.setAttribute("aria-selected",b.dataset.v===v?"true":"false");});
+  if(v==="route")renderRoute();
+  window.scrollTo(0,0);
+  try{localStorage.setItem("jp-tab",v)}catch(e){}
+}
+
+/* ===== Events ===== */
+document.addEventListener("click",function(e){
+  var t=e.target.closest("[data-v],[data-go],[data-day],#backList,[data-card],#openCard,#closeCard,[data-copy]");
+  if(!t)return;
+  if(t.dataset.v)show(t.dataset.v);
+  else if(t.dataset.go)show(t.dataset.go);
+  else if(t.dataset.day)openDay(+t.dataset.day);
+  else if(t.id==="backList")renderRoute();
+  else if(t.id==="openCard"||t.dataset.card){document.getElementById("card").hidden=false;}
+  else if(t.id==="closeCard"){document.getElementById("card").hidden=true;}
+  else if(t.dataset.copy){var txt=t.dataset.copy;try{navigator.clipboard.writeText(txt).then(function(){t.textContent="הועתק";},function(){t.textContent=txt;});}catch(err){t.textContent=txt;}}
+});
+document.addEventListener("keydown",function(e){if(e.key==="Escape")document.getElementById("card").hidden=true;});
+
+document.addEventListener("change",function(e){
+  var id=e.target.dataset&&e.target.dataset.check; if(!id)return;
+  var on=e.target.checked; checks[id]={done:on}; lsSet("jp-checks",checks);
+  e.target.closest(".chk").classList.toggle("done",on);
+  if(db){db.collection("checks").doc(id).set({done:on,at:new Date().toISOString()}).catch(onWriteErr);}
+  if(current==="book")setTimeout(renderBook,250);
+  renderToday();
+});
+
+var timers={};
+document.addEventListener("input",function(e){
+  var key=e.target.dataset&&e.target.dataset.note; if(!key)return;
+  var val=e.target.value; notes[key]={text:val}; lsSet("jp-notes",notes);
+  var ss=document.getElementById("ss-"+key); if(ss)ss.textContent="שומר...";
+  clearTimeout(timers[key]);
+  timers[key]=setTimeout(function(){
+    if(!db){if(ss)ss.textContent="נשמר במכשיר הזה";return;}
+    db.collection("notes").doc(key).set({text:val,at:new Date().toISOString()}).then(function(){if(ss)ss.textContent="נשמר ומשותף";}).catch(function(err){onWriteErr(err);if(ss)ss.textContent="לא נשמר בשיתוף";});
+  },1200);
+});
+function onWriteErr(err){
+  if(err&&err.code==="invalid_argument"){canWrite=false;document.getElementById("syncNote").textContent="יש לך הרשאת צפייה בלבד, הסימונים שלך לא נשמרים לשיתוף.";}
+}
+
+/* ===== Boot ===== */
+var saved=null; try{saved=localStorage.getItem("jp-tab")}catch(e){}
+renderAll();
+var t0=jstToday();
+if(t0>=TRIP_START&&t0<=TRIP_END)show("today"); else if(saved)show(saved);
+setInterval(tick,30000);
+
+function isTyping(){var a=document.activeElement;return a&&a.tagName==="TEXTAREA";}
+document.getElementById("syncNote").textContent="הסימונים וההערות נשמרים בטלפון הזה בלבד. אחרי פתיחה ראשונה עם אינטרנט, האתר נפתח גם בלי קליטה.";
+if("serviceWorker" in navigator&&location.protocol==="https:"){navigator.serviceWorker.register("sw.js").catch(function(){});}
+})();
+</script>
+
+</body>
+</html>
